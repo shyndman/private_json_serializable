@@ -16,7 +16,7 @@ _Person _$_PersonFromJson(Map<String, dynamic> json) {
         ? null
         : DateTime.parse(json['last-order'] as String),
     orders: (json['orders'] as List)
-        .map((e) => Order.fromJson(e as Map<String, dynamic>))
+        .map((e) => _Order.fromJson(e as Map<String, dynamic>))
         .toList(),
   );
 }
@@ -40,20 +40,20 @@ Map<String, dynamic> _$_PersonToJson(_Person instance) {
   return val;
 }
 
-Order _$OrderFromJson(Map<String, dynamic> json) {
-  return Order(
-    Order._dateTimeFromEpochUs(json['date'] as int),
+_Order _$_OrderFromJson(Map<String, dynamic> json) {
+  return _Order(
+    _Order._dateTimeFromEpochUs(json['date'] as int),
   )
     ..count = json['count'] as int
     ..itemNumber = json['itemNumber'] as int
     ..isRushed = json['isRushed'] as bool
     ..item = json['item'] == null
         ? null
-        : Item.fromJson(json['item'] as Map<String, dynamic>)
-    ..prepTime = Order._durationFromMilliseconds(json['prep-time'] as int);
+        : _Item.fromJson(json['item'] as Map<String, dynamic>)
+    ..prepTime = _Order._durationFromMilliseconds(json['prep-time'] as int);
 }
 
-Map<String, dynamic> _$OrderToJson(Order instance) {
+Map<String, dynamic> _$_OrderToJson(_Order instance) {
   final val = <String, dynamic>{};
 
   void writeNotNull(String key, dynamic value) {
@@ -66,19 +66,19 @@ Map<String, dynamic> _$OrderToJson(Order instance) {
   writeNotNull('itemNumber', instance.itemNumber);
   writeNotNull('isRushed', instance.isRushed);
   writeNotNull('item', instance.item);
-  writeNotNull('prep-time', Order._durationToMilliseconds(instance.prepTime));
-  writeNotNull('date', Order._dateTimeToEpochUs(instance.date));
+  writeNotNull('prep-time', _Order._durationToMilliseconds(instance.prepTime));
+  writeNotNull('date', _Order._dateTimeToEpochUs(instance.date));
   return val;
 }
 
-Item _$ItemFromJson(Map<String, dynamic> json) {
-  return Item()
+_Item _$_ItemFromJson(Map<String, dynamic> json) {
+  return _Item()
     ..count = json['count'] as int
     ..itemNumber = json['itemNumber'] as int
     ..isRushed = json['isRushed'] as bool;
 }
 
-Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
+Map<String, dynamic> _$_ItemToJson(_Item instance) => <String, dynamic>{
       'count': instance.count,
       'itemNumber': instance.itemNumber,
       'isRushed': instance.isRushed,

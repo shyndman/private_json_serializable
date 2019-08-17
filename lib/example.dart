@@ -20,11 +20,11 @@ class _Person {
   final DateTime lastOrder;
 
   @JsonKey(nullable: false)
-  List<Order> orders;
+  List<_Order> orders;
 
   _Person(this.firstName, this.lastName, this.dateOfBirth,
-      {this.middleName, this.lastOrder, List<Order> orders})
-      : orders = orders ?? <Order>[];
+      {this.middleName, this.lastOrder, List<_Order> orders})
+      : orders = orders ?? <_Order>[];
 
   factory _Person.fromJson(Map<String, dynamic> json) => _$_PersonFromJson(json);
 
@@ -32,11 +32,11 @@ class _Person {
 }
 
 @JsonSerializable(includeIfNull: false)
-class Order {
+class _Order {
   int count;
   int itemNumber;
   bool isRushed;
-  Item item;
+  _Item item;
 
   @JsonKey(
       name: 'prep-time',
@@ -47,11 +47,11 @@ class Order {
   @JsonKey(fromJson: _dateTimeFromEpochUs, toJson: _dateTimeToEpochUs)
   final DateTime date;
 
-  Order(this.date);
+  _Order(this.date);
 
-  factory Order.fromJson(Map<String, dynamic> json) => _$OrderFromJson(json);
+  factory _Order.fromJson(Map<String, dynamic> json) => _$_OrderFromJson(json);
 
-  Map<String, dynamic> toJson() => _$OrderToJson(this);
+  Map<String, dynamic> toJson() => _$_OrderToJson(this);
 
   static Duration _durationFromMilliseconds(int milliseconds) =>
       milliseconds == null ? null : Duration(milliseconds: milliseconds);
@@ -67,14 +67,14 @@ class Order {
 }
 
 @JsonSerializable()
-class Item {
+class _Item {
   int count;
   int itemNumber;
   bool isRushed;
 
-  Item();
+  _Item();
 
-  factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
+  factory _Item.fromJson(Map<String, dynamic> json) => _$_ItemFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ItemToJson(this);
+  Map<String, dynamic> toJson() => _$_ItemToJson(this);
 }
